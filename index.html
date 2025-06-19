@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>fursona creator | idea generator for your fursona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-box">
+    <h1>Fursona creator</h1>
+
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" placeholder="Escribe un nombre" />
+      <button id="randomNameBtn">🎲</button>
+    </div>
+
+    <div class="form-group">
+      <label for="animal">Animal:</label>
+      <select id="animal">
+        <option value="Zorro">Zorro</option>
+        <option value="Lobo">Lobo</option>
+        <option value="Protogen">Protogen</option>
+        <option value="Dutch Angel Dragon">Dutch Angel Dragon</option>
+        <option value="Dragón">Dragón</option>
+        <option value="Gato">Gato</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Color principal:</label>
+      <input type="color" id="color1" value="#3399ff" />
+      <div class="color-box" id="color1Box"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Color secundario:</label>
+      <input type="color" id="color2" value="#ffffff" />
+      <div class="color-box" id="color2Box"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="hobbyFilter">Filtrar pasatiempos:</label>
+      <input type="text" id="hobbyFilter" placeholder="Escribe algo..." />
+    </div>
+
+    <div id="hobbiesGroup" class="form-group">
+      <label><input type="checkbox" value="dibujar"> Dibujar</label>
+      <label><input type="checkbox" value="programar"> Programar</label>
+      <label><input type="checkbox" value="música"> Música</label>
+      <label><input type="checkbox" value="jugar videojuegos"> Jugar videojuegos</label>
+      <label><input type="checkbox" value="leer"> Leer</label>
+      <label><input type="checkbox" value="bailar"> Bailar</label>
+      <label><input type="checkbox" value="explorar"> Explorar</label>
+      <label><input type="checkbox" value="cosplay"> Cosplay</label>
+    </div>
+
+    <button id="generateBtn">✨ Generar</button>
+    <button id="copyBtn">📋 Copiar</button>
+
+    <div id="result" class="result"></div>
+
+    <footer>
+      <img src="/20250619_153508.png" alt="Logo del desarrollador" class="logo" />
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+<script>
+  
+  const nameInput = document.getElementById('name');
+const animal = document.getElementById('animal');
+const color1 = document.getElementById('color1');
+const color2 = document.getElementById('color2');
+const color1Box = document.getElementById('color1Box');
+const color2Box = document.getElementById('color2Box');
+const generateBtn = document.getElementById('generateBtn');
+const copyBtn = document.getElementById('copyBtn');
+const result = document.getElementById('result');
+const hobbyFilter = document.getElementById('hobbyFilter');
+const hobbiesGroup = document.getElementById('hobbiesGroup');
+const randomNameBtn = document.getElementById('randomNameBtn');
+
+const names = ['Zyra', 'Koda', 'Niko', 'Lumi', 'Axo', 'Vix', 'Fenna', 'Nova'];
+
+randomNameBtn.onclick = () => {
+  nameInput.value = names[Math.floor(Math.random() * names.length)];
+};
+
+color1.oninput = () => color1Box.style.backgroundColor = color1.value;
+color2.oninput = () => color2Box.style.backgroundColor = color2.value;
+
+hobbyFilter.addEventListener('input', () => {
+  const filter = hobbyFilter.value.toLowerCase();
+  Array.from(hobbiesGroup.children).forEach(label => {
+    label.style.display = label.textContent.toLowerCase().includes(filter) ? 'inline-block' : 'none';
+  });
+});
+
+generateBtn.onclick = () => {
+  const name = nameInput.value || 'Sin nombre';
+  const species = animal.value;
+  const selectedHobbies = Array.from(hobbiesGroup.querySelectorAll('input:checked')).map(i => i.value);
+  const description = `Tu fursona es un/a ${species} llamado/a ${name}, con colores ${color1.value} y ${color2.value}, que disfruta de: ${selectedHobbies.join(', ') || 'ningún pasatiempo especificado'}.`;
+  result.textContent = description;
+};
+
+copyBtn.onclick = () => {
+  navigator.clipboard.writeText(result.textContent).then(() => {
+    alert("¡Descripción copiada!");
+  });
+};
+  
+</script>
+
+
+
+<div id="preload" style="position:fixed;inset:0;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999">
+  <img src="/20250619_153508.png" alt="Logo" style="width:300px;margin-bottom:10px">
+  <div style="display:flex;gap:10px">
+    <div class="dot" style="width:15px;height:15px;border-radius:50%;background:#ccc"></div>
+    <div class="dot" style="width:15px;height:15px;border-radius:50%;background:#ccc"></div>
+    <div class="dot" style="width:15px;height:15px;border-radius:50%;background:#ccc"></div>
+    <div class="dot" style="width:15px;height:15px;border-radius:50%;background:#ccc"></div>
+  </div>
+</div>
+<script>
+  let dots = document.querySelectorAll('.dot'), i = 0;
+  let ciclo = setInterval(() => {
+    dots.forEach((d, j) => d.style.background = j === i ? '#91cc00' : '#ccc');
+    i = (i + 1) % dots.length;
+  }, 400);
+  setTimeout(() => {
+    document.getElementById('preload')?.remove();
+    clearInterval(ciclo);
+  }, 3000); // 3 segundos
+</script>

@@ -1,0 +1,81 @@
+body {
+  font-family: 'Luckiest Guy', cursive;
+  background: #A5D800;
+  margin: 0;
+  padding: 0;
+}
+
+.app-box {
+  background: white;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #A5D800}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+input[type="text"],
+select,
+input[type="color"] {
+  flex: 1;
+  padding: 6px;
+  font-family: sans-serif;
+  background: #91cc00;
+  color:white;
+  border: 1px solid white;
+}
+
+.color-box {
+  width: 25px;
+  height: 25px;
+  
+  border: 1px solid #A5D800;
+  border-radius: 4px;
+}
+
+button {
+  padding: 6px 10px;
+  border-radius: 5px;
+  background: #A5D800;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005fa3;
+}
+
+#result {
+  background: #f5faff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 12px;
+  min-height: 40px;
+  font-family: sans-serif;
+  color: #222;
+}
+
+footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.logo {
+  max-width: 200px;
+  opacity: 0.8;
+}
+
